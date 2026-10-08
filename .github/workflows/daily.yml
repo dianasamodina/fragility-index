@@ -1,0 +1,62 @@
+name: Daily forecast
+
+on:
+  schedule:
+    - cron: "20 0 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  forecast:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Restore data cache
+        uses: actions/cache@v4
+        with:
+          path: data/raw
+          key: raw-${{ github.run_id }}
+          restore-keys: raw-
+
+      - name: Collect data
+        run: python collect.py
+
+      - name: Build index
+        run: python index_build.py
+
+      - name: Append forecast to log
+        run: python publish.py
+
+      - name: Commit the log
+        run: |
+          git config user.name  "fragility-bot"
+          git config user.email "fragility-bot@users.noreply.github.com"
+          git add logs/forecast_log.csv
+          if git diff --staged --quiet; then
+            echo "No changes"
+          else
+            git commit -m "forecast $(date -u +%F)"
+            git push
+          fi
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: index-${{ github.run_number }}
+          path: |
+            data/index.csv
+            data/raw.csv
+          retention-days: 30
