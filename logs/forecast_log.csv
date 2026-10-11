@@ -2,3 +2,4 @@ date,fragility,zone,btc_price,horizon_days,threshold_pct,call,resolved_on,realiz
 2026-10-08,12.3,green,82929.17,14,-15.0,CALM: no accumulated fragility detected,,,pending,"Options market calm (DVOL, inverted) (z=+0.7); Realised volatility 30d (inverted) (z=+0.3); DeFi TVL change, 14d (z=-0.0)"
 2026-10-09,36.9,green,81775.99,14,-15.0,CALM: no accumulated fragility detected,,,pending,"Options market calm (DVOL, inverted) (z=+0.9); DeFi TVL change, 14d (z=+0.4); Realised volatility 30d (inverted) (z=+0.3)"
 2026-10-10,40.2,green,82499.99,14,-15.0,CALM: no accumulated fragility detected,,,pending,"Options market calm (DVOL, inverted) (z=+1.1); Realised volatility 30d (inverted) (z=+0.3); Drawdown from 90-day high (z=-1.4)"
+2026-10-11,36.2,green,82914.78,14,-15.0,CALM: no accumulated fragility detected,,,pending,"Options market calm (DVOL, inverted) (z=+1.0); Realised volatility 30d (inverted) (z=+0.3); Drawdown from 90-day high (z=-1.4)"
